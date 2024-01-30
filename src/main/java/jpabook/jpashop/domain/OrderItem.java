@@ -7,13 +7,16 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED) // 생성자를 protect로 막는 것과 동일한 효과 -> lombok
 public class OrderItem {
     @Id
     @GeneratedValue
@@ -30,6 +33,9 @@ public class OrderItem {
 
     private int orderPrice;
     private int count;
+
+//    protected OrderItem() {
+//    } // 생성자로 제약하기
 
     //==생성 메서드==//
     public static OrderItem createOrderItem(Item item, int orderPrice, int count) {
