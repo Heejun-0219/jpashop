@@ -1,4 +1,4 @@
-package jpabook.jpashop.domain;
+package jpabook.jpashop.domain.item;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorColumn;
@@ -11,14 +11,16 @@ import jakarta.persistence.InheritanceType;
 import jakarta.persistence.ManyToMany;
 import java.util.ArrayList;
 import java.util.List;
+import jpabook.jpashop.domain.Category;
 import jpabook.jpashop.exception.NotEnoughStockException;
 import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "dtype")
 @Getter
-//@Setter -> 세터를 사용하지 않고 비즈니스 로직을 활용해서 프로퍼티를 수정해줘야한다.
+@Setter // -> 세터를 사용하지 않고 비즈니스 로직을 활용해서 프로퍼티를 수정해줘야한다.
 public abstract class Item {
     @Id
     @GeneratedValue
