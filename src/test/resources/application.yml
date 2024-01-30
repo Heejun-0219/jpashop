@@ -1,0 +1,19 @@
+#spring: DB 설정이 없다면 스프링부트가 자동으로 in-memory 설정한다.
+#  datasource:
+#    #    url: jdbc:h2:tcp://localhost/~/jpashop
+#    url: jdbc:h2:mem:test # in-memory test
+#    username: sa
+#    password:
+#    driver-class-name: org.h2.Driver
+#
+#  jpa:
+#    hibernate:
+#      ddl-auto: create # default : create-drop -> 생성 후 자원정리까지 자동으로 해준다.
+#    properties:
+#      hibernate:
+#        format_sql: true
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+    org.hibernate.orm.jdbc.bind: trace
