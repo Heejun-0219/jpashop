@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/header :: header" />
+<head th:replace="fragments/header :: header"/>
 <style>
     .fieldError {
         border-color: #bd2130;
@@ -18,6 +18,7 @@
             <input type="text" th:field="*{name}" class="form-control" placeholder="이름을 입력하세요"
                    th:class="${#fields.hasErrors('name')}? 'form-control fieldError' : 'form-control'">
             <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Incorrect date</p>
+            <!-- 위의 두 코드가 에러 메세지도 뽑아줄 수 있다. -->
 
         </div>
         <div class="form-group">
@@ -35,7 +36,7 @@
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
     <br/>
-    <div th:replace="fragments/footer :: footer" />
+    <div th:replace="fragments/footer :: footer"/>
 </div> <!-- /container -->
 
 </body>
