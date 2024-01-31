@@ -19,6 +19,15 @@ public class ItemService { // 위임 클래스 -> 필요한가 생각해볼 필�
         itemRepository.save(item);
     }
 
+    // 변경감지 기능 
+    @Transactional
+    public void updateItem(Long itemId, String name, int price, int stockQuantity) {
+        Item item = itemRepository.findOne(itemId);
+        item.setName(name);
+        item.setPrice(price);
+        item.setStockQuantity(stockQuantity);
+    }
+
     public List<Item> findAll() {
         return itemRepository.findAll();
     }

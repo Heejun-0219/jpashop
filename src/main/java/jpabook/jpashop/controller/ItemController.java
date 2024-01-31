@@ -28,6 +28,7 @@ public class ItemController {
     @PostMapping("/items/new")
     public String create(BookForm bookForm) {
         Book book = new Book();
+
         book.setName(bookForm.getName());
         book.setPrice(bookForm.getPrice());
         book.setStockQuantity(bookForm.getStockQuantity());
@@ -69,17 +70,22 @@ public class ItemController {
     }
 
     @PostMapping("items/{itemId}/edit") // 서비스 계층 앞단 혹은 뒷단에서 아이템 아이디를 관리해야 보안 취약점을 없앨 수 있다.
-    public String updateItem(@ModelAttribute("form") BookForm form) {
-        Book book = new Book();
+    public String updateItem(@PathVariable("itemId") Long itemId, @ModelAttribute("form") BookForm form) {
+//        Book book = new Book();
+//
+//        book.setId(form.getId());
+//        book.setName(form.getName());
+//        book.setPrice(form.getPrice());
+//        book.setStockQuantity(form.getStockQuantity());
+//        book.setAuthor(form.getAuthor());
+//        book.setIsbn(form.getIsbn());
+//
+//        itemService.saveItem(book);
+        // merge 방식 -> 식별자를 통해서 찾고, 넘겨온 아이템을 가지고 모든 필드 데이터를 바꾸고 반환한다. 따라서 해당 커밋이 반영된다.
+        // 후에 병합된 내용은 기존에 존재하는 아이템과는 다른 객체로 존재하게 되며, 다음에 아이템에 접근할 때는 머지할 때 사용한 아이템으로 접근해야 한다.
+        // merge 위험한 이유 : 넘겨온 값 중 값이 없는 필드가 있다면, null 대체한다. -> 모든 필드를 대체하기 때문에
 
-        book.setId(form.getId());
-        book.setName(form.getName());
-        book.setPrice(form.getPrice());
-        book.setStockQuantity(form.getStockQuantity());
-        book.setAuthor(form.getAuthor());
-        book.setIsbn(form.getIsbn());
-
-        itemService.saveItem(book);
+        itemService.updateItem(itemId, form.getName(), form.getPrice(), form.getStockQuantity());
         return "redirect:/items";
     }
 }
