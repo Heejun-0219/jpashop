@@ -43,11 +43,12 @@ public class MemberController {
         return "redirect:/"; // PRG
     }
 
+    // API 경우에는 절대로 엔티티를 그대로 넘기면 안된다. DTO 만들어서 넘겨야한다. 직접 넘기게 된다면, API 스펙이 변경되는 문제가 발생한다.
     @GetMapping("/members")
-    public String members(Model model) {
+    public String list(Model model) {
         List<Member> members = memberService.findMembers();
-        model.addAttribute(members);
+        model.addAttribute("members", members);
 
-        return "memebers/memberList";
+        return "members/memberList";
     }
 }
